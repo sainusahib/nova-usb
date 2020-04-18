@@ -1,0 +1,60 @@
+diff /usr/lib/python3/dist-packages/nova/virt/libvirt/config.py /usr/lib/python3/dist-packages/nova/virt/libvirt/config.py.bak
+1795c1795
+<         self.driver_iommu = True
+---
+>         self.driver_iommu = False
+1883,1894d1882
+< class LibvirtConfigUsbRedir(LibvirtConfigGuestDevice):
+<     def __init__(self, **kwargs):
+<         super(LibvirtConfigUsbRedir, self).__init__(
+<             root_name='redirdev')
+<         self.bus = "usb"
+<         self.type = "spicevmc"
+< 
+<     def format_dom(self):
+<         dev = super(LibvirtConfigUsbRedir, self).format_dom()
+<         dev.set("bus", self.bus)
+<         dev.set("type", self.type)
+<         return dev
+
+
+
+
+
+
+
+
+==========================================
+
+
+diff /usr/lib/python3/dist-packages/nova/virt/libvirt/driver.py /usr/lib/python3/dist-packages/nova/virt/libvirt/driver.py.bak 
+5887,5892d5886
+<             num_c = int(CONF.spice.usbredir_channels)
+<             if num_c > 0:
+<                 num_use = num_c if num_c <=4 else 4
+<                 for i in range(1, num_use+1):
+<                     usb = vconfig.LibvirtConfigUsbRedir()
+<                     guest.add_device(usb)
+
+
+
+
+
+
+
+
+===========================================
+
+
+
+
+diff /usr/lib/python3/dist-packages/nova/conf/spice.py /usr/lib/python3/dist-packages/nova/conf/spice.py.bak 
+71,75d70
+<     cfg.StrOpt('usbredir_channels',
+<         default='4',
+<         help="""
+< channel to redirect usb for spice
+< """),
+
+
+
