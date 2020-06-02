@@ -1,0 +1,21 @@
+/usr/lib/python3/dist-packages/nova/virt/libvirt# diff config.py.bkp config.py
+
+> class LibvirtConfigGuestSound(LibvirtConfigGuestDevice):
+>     def __init__(self, **kwargs):
+>        super(LibvirtConfigGuestSound, self).__init__(root_name="sound",**  kwargs)
+>        self.model = "ich6"
+>     def format_dom(self):
+>        dev = super(LibvirtConfigGuestSound, self).format_dom()
+>        dev.set("model", self.model)
+>        return dev
+
+
+
+
+
+root@compute1:/usr/lib/python3/dist-packages/nova/virt/libvirt# diff driver.py.bkp  driver.py
+5125d5124
+< 
+5127a5127,5128
+>         sound = vconfig.LibvirtConfigGuestSound()
+>         guest.add_device(sound) 
